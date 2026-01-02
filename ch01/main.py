@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -27,3 +27,12 @@ class ItemCreate(BaseModel):
 @app.post("/items")
 def create_item(item: ItemCreate):
     return {"saved": item}
+
+class SearchQuery(BaseModel):
+    q: str
+    limit: int = 10
+    cursor: str | None = None
+
+@app.get("/search/model")
+async def search(params: SearchQuery = Depends()):
+    return {"query": params.q, "limit": params.limit, "cursor": params.cursor}
