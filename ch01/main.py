@@ -1,7 +1,6 @@
 from typing import Optional
 
-from fastapi import FastAPI, Depends, status
-from fastapi.openapi.models import Response
+from fastapi import FastAPI, Depends, status, Response, Header
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -50,3 +49,8 @@ def create_item(item: ItemCreate, response: Response):
     response.status_code=status.HTTP_201_CREATED
     response.headers["Location"] = f"/items/1"
     return {"saved": item}
+
+
+@app.get("/me")
+async def read_me(user_agent: str | None = Header(default=None), x_request_id: str | None = Header(default=None)):
+    return {"user_agent": user_agent, "x_request_id": x_request_id}
