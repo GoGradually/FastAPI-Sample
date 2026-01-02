@@ -1,13 +1,7 @@
-from fastapi import FastAPI
+import ch01.main
 
-app = FastAPI()
+if __name__ == "__main__":
+    import uvicorn
 
+    uvicorn.run("ch01.main:app", host="localhost", port=8000, reload=True)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
