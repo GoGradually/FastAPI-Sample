@@ -36,3 +36,12 @@ class SearchQuery(BaseModel):
 @app.get("/search/model")
 async def search(params: SearchQuery = Depends()):
     return {"query": params.q, "limit": params.limit, "cursor": params.cursor}
+
+
+class Item(BaseModel):
+    id: int
+    name: str
+
+@app.get("/items/{item_id}", response_model=Item)
+async def get_item(item_id: int):
+    return Item(id=item_id, name="Sample Item")
