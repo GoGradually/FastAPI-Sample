@@ -2,9 +2,17 @@ from typing import Optional
 
 from fastapi import FastAPI, Depends, status, Response, Header
 from pydantic import BaseModel
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
