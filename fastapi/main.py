@@ -4,7 +4,7 @@ from fastapi import FastAPI, Depends, status, Response, Header
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
 
-import ch01.items
+import fastapi.items
 
 app = FastAPI()
 
@@ -16,7 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(ch01.items.router, tags=["items"])
+app.include_router(fastapi.items.router, tags=["items"])
 
 @app.get("/")
 async def root():

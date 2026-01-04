@@ -1,7 +1,7 @@
-import ch01.main
+import fastapi.main
 
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("ch01.main:app", host="localhost", port=8000, reload=True)
+    uvicorn.run("fastapi.main:app", host="localhost", port=8000, reload=True)
 
